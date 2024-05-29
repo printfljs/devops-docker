@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+
+  simple-web-service:
+    image: devopsdockeruh/simple-web-service:latest
+    ports:
+      - 8080:8080
+    volumes:
+      - ./log/text.log:/usr/src/app/text.log
+    command: server
+    container_name: simple

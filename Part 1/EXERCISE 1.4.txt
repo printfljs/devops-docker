@@ -1,0 +1,10 @@
+Return the command you used to start process and the command(s) you used to fix the ensuing problems:
+
+docker run -it --rm ubuntu sh -c 'while true; do echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website; done'
+docker ps -a
+docker exec -it blissful_moser bash
+apt-get update
+apt-get install -y curl
+
+we can use:
+docker run -it --rm ubuntu sh -c 'apt-get update && apt-get install -y curl && while true; do echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website; done'

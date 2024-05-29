@@ -1,0 +1,8 @@
+Commands:
+
+docker pull devopsdockeruh/simple-web-service
+mkdir log
+cd log
+touch text.log
+cd ..
+docker run -v "$(pwd)/log/text.log:/usr/src/app/text.log" devopsdockeruh/simple-web-service:latest

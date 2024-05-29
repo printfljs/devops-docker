@@ -1,0 +1,11 @@
+the secret message: 
+
+You can find the source code here: https://github.com/docker-hy
+
+
+
+command(s):
+
+docker run -d -it --rm --name simple devopsdockeruh/simple-web-service:ubuntu
+docker exec -it simple bash
+tail -f ./text.log

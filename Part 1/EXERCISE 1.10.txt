@@ -1,0 +1,4 @@
+Commands:
+
+docker pull devopsdockeruh/simple-web-service
+docker run -p localhost:8080:8080 devopsdockeruh/simple-web-service:latest server

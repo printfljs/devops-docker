@@ -1,0 +1,31 @@
+Dockerfile:
+
+FROM ubuntu:20.04
+
+WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y ca-certificates gcc
+
+COPY . .
+
+RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.15.linux-amd64.tar.gz
+ENV PATH=$PATH:/usr/local/go/bin
+RUN chmod +x $HOME/.profile
+RUN $HOME/.profile
+RUN go version
+
+RUN go build
+
+RUN go test ./...
+
+EXPOSE 8080
+
+CMD ["./server", "REQUEST_ORIGIN","https://example.com"]
+
+
+
+Commands:
+
+touch Dockerfile
+docker build -t backend .
+docker run -p 8080:8080 backend

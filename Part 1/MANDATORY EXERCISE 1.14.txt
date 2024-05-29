@@ -1,0 +1,64 @@
+Edited dockerfile for front-end:
+
+FROM ubuntu:20.04
+
+WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash
+RUN apt-get install -y nodejs
+RUN node -v && npm -v
+
+COPY . .
+
+RUN npm install
+
+ENV REACT_APP_BACKEND_URL=http://localhost:8080/api/
+
+RUN npm run build
+
+EXPOSE 5000
+
+RUN npm install -g serve
+
+CMD ["serve", "-s","-l","5000","build"]
+
+
+
+
+
+
+Edited dockerfile for back-end:
+
+FROM ubuntu:20.04
+
+WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y ca-certificates gcc
+
+COPY . .
+
+RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.15.linux-amd64.tar.gz
+ENV PATH=$PATH:/usr/local/go/bin
+RUN chmod +x $HOME/.profile
+RUN $HOME/.profile
+RUN go version
+
+ENV REQUEST_ORIGIN=http://localhost:5000
+RUN go build
+
+RUN go test ./...
+
+EXPOSE 8080
+
+CMD ["./server"]
+
+
+
+
+Commands:
+docker build -t backend .
+docker run -d -p 8080:8080 backend
+
+docker build -t frontend .
+docker run -d -p 5000:5000 frontend

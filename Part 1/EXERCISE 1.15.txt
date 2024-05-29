@@ -1,0 +1,35 @@
+Link for docker hub project: https://hub.docker.com/repository/docker/ganshuu/blog/general
+
+Running result:
+
+root@LAPTOP-TOCBVR95:~/blog-vue-typescript# docker build -t blog .
+
+[+] Building 110.4s (14/14) FINISHED                                                                     docker:default
+ => [internal] load build definition from Dockerfile                                                               0.0s
+ => => transferring dockerfile: 355B                                                                               0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:20.04                                                    1.2s
+ => [auth] library/ubuntu:pull token for registry-1.docker.io                                                      0.0s
+ => [internal] load .dockerignore                                                                                  2.5s
+ => => transferring context: 2B                                                                                    0.0s
+ => [1/8] FROM docker.io/library/ubuntu:20.04@sha256:874aca52f79ae5f8258faff03e10ce99ae836f6e7d2df6ecd3da5c1cad3a  0.0s
+ => [internal] load build context                                                                                  0.1s
+ => => transferring context: 31.03kB                                                                               0.1s
+ => CACHED [2/8] WORKDIR /usr/src/app                                                                              0.0s
+ => CACHED [3/8] RUN apt-get update && apt-get install -y curl                                                     0.0s
+ => CACHED [4/8] RUN curl -sL https://deb.nodesource.com/setup_20.x | bash                                         0.0s
+ => CACHED [5/8] RUN apt-get install -y nodejs && npm install -g yarn                                              0.0s
+ => CACHED [6/8] RUN node -v && npm -v && yarn -v                                                                  0.0s
+ => [7/8] COPY . .                                                                                                 0.7s
+ => [8/8] RUN yarn install                                                                                        81.7s
+ => exporting to image                                                                                            24.0s
+ => => exporting layers                                                                                           24.0s
+ => => writing image sha256:0f3d4328460ffbb6b99ebc650f69b9f11978e0b1a08224eb17aa5c6d4cc40e02                       0.0s
+ => => naming to docker.io/library/blog                   
+
+root@LAPTOP-TOCBVR95:~/blog-vue-typescript# docker run -p 4173:4173 blog
+
+yarn run v1.22.22
+warning package.json: No license field
+$ vite preview --host 0.0.0.0
+  ➜  Local:   http://localhost:4173/
+  ➜  Network: http://172.17.0.3:4173/
